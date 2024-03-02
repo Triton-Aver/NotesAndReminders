@@ -9,17 +9,19 @@ namespace NotesAndReminders.Server.Controllers
     [ApiController]
     public class NoteController : ControllerBase
     {
+        private readonly ILogger<NoteController> _logger;        
         private readonly INoteRepository _noteRepo;
-        public NoteController(INoteRepository noteRepo)
+        public NoteController(INoteRepository noteRepo, ILogger<NoteController> logger)
         {
             _noteRepo = noteRepo;
+            _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetNotes")]
         public IEnumerable<Note> Get()
-        {           
-            IEnumerable<Note> productDtos =  _noteRepo.GetAll();            
-            return productDtos;
+        {
+            IEnumerable<Note> notes =  _noteRepo.GetAll();            
+            return notes.ToArray();
         }
         [HttpGet("{id}")]
         public Note Get(int id)

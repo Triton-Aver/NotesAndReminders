@@ -4,3 +4,8 @@ GET {{NotesAndReminders.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{NotesAndReminders.Server_HostAddress}}/api/Note/
+Accept: application/json
+
+###
