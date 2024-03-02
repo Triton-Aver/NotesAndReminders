@@ -5,5 +5,6 @@ namespace NotesAndReminders.Server.Interfaces
 {
     public interface INoteRepository: IRepositoryBase<Note>
     {
+        void Update(Note obj);
     }
 }

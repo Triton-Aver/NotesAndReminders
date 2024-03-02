@@ -12,5 +12,15 @@ namespace NotesAndReminders.Server.Repositories
         {
             _db = db;
         }
+
+        public void Update(Note obj)
+        {
+            var objFromDb = base.FirstOrDefault(u => u.NoteId == obj.NoteId);
+            if (objFromDb != null)
+            {
+                objFromDb.Header = obj.Header;
+                objFromDb.Description = obj.Description;
+            }
+        }
     }
 }

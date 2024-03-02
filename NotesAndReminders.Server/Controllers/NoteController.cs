@@ -21,5 +21,47 @@ namespace NotesAndReminders.Server.Controllers
             IEnumerable<Note> productDtos =  _noteRepo.GetAll();            
             return productDtos;
         }
+        [HttpGet("{id}")]
+        public Note Get(int id)
+        {
+            Note note = _noteRepo.Find(id);
+            return note;
+        }
+
+        [HttpPost]
+        public IActionResult Post(Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                _noteRepo.Add(note);
+                _noteRepo.Save();
+                return Ok(note);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut]
+        public IActionResult Put(Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                _noteRepo.Update(note);
+                _noteRepo.Save();
+                return Ok(note);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Note note = _noteRepo.Find(id);
+            if (note != null)
+            {
+                _noteRepo.Remove(note);
+                _noteRepo.Save();
+            }
+            return Ok(note);
+        }
     }
 }
