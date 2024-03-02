@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotesAndReminders.DataBase.Models;
 
 namespace NotesAndReminders.Server.Controllers
 {

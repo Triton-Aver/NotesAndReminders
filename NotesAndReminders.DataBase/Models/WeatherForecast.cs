@@ -1,4 +1,4 @@
-namespace NotesAndReminders.Server
+namespace NotesAndReminders.DataBase.Models
 {
     public class WeatherForecast
     {
