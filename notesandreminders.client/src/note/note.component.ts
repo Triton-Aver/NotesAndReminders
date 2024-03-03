@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Note } from './note';
-//interface Note {
-//  NoteId?: number;
-//  Header?: string;
-//  Description?: string;
-//  DateCreate?: Date;   
-//}
+import { TageModule } from '../tage/tage.module'
 
 @Component({
   selector: 'app-note',
@@ -17,8 +12,19 @@ export class NoteComponent implements OnInit {
   private url = 'https://localhost:7156/api/Note';
   public note: Note = new Note();
   public notes: Note[] = [];
+  
   tableMode: boolean = true;
   constructor(private http: HttpClient) { }
+
+  title = "geeksforgeeks-multiSelect";
+
+  cars = [
+    { id: 6, name: "базовый" },
+    { id: 5, name: "работа" },    
+  ];
+
+  selected = [{ id: 6, name: "базовый" }]; 
+
 
   ngOnInit() {
     this.getNotes();

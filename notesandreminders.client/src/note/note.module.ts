@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from "@ng-select/ng-select"; 
 
 import { NoteComponent } from './note.component';
 
@@ -9,9 +10,9 @@ import { NoteComponent } from './note.component';
   declarations: [NoteComponent],
   imports: [
     BrowserModule, HttpClientModule,
-    FormsModule
+    FormsModule, NgSelectModule
   ],
     providers: [],
-    bootstrap: [NoteComponent]
+  bootstrap: [NoteComponent]
 })
 export class NoteModule { }

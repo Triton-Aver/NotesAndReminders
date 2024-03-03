@@ -48,6 +48,7 @@ namespace NotesAndReminders.Server.Controllers
             {
                 _noteRepo.Add(note);
                 _noteRepo.Save();
+                //_noteRepo.CreateNote(note);
                 return Ok(note);
             }
             return BadRequest(ModelState);

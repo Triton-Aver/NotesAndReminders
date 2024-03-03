@@ -29,7 +29,7 @@ describe('NoteComponent', () => {
         header: 'Test',
         description: 'Test',
         dateCreate: new Date('2021-10-01'),
-        tags: [{ tageId: 1, name: 'Tag 1' }]
+        /*tags: [{ tageId: 1, name: 'Tag 1' }]*/
       }
     ];
 

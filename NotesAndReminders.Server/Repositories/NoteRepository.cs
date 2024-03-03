@@ -23,5 +23,13 @@ namespace NotesAndReminders.Server.Repositories
                 objFromDb.Description = obj.Description;
             }            
         }
+
+        public void CreateNote(Note obj) 
+        {
+            //foreach(var tag in obj.Tags)
+            //{
+            //    _db.Database.ExecuteSqlRaw(@$"INSERT INTO public.""NoteTage"" (""NoteId"", ""TagId"") VALUES ({obj.NoteId}, {tag.TagId});");
+            //}
+        }
     }
 }

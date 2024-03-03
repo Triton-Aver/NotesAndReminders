@@ -8,8 +8,8 @@ namespace NotesAndReminders.DataBase.Models
         [Key]
         public int ReminderId { get; set; }
         public string Description { get; set; }
-        public DateTime DeadLine { get; set; } = DateTime.Now.AddDays(1);    //Дата напоминания        
-        public DateTime DueDate { get; set; }
+        public DateTimeOffset DeadLine { get; set; }    //Дата напоминания        
+        public DateTimeOffset DueDate { get; set; }
 
         [ForeignKey(nameof(ReminderId))]
         public Note? Note { get; set; }
