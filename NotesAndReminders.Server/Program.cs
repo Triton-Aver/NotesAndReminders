@@ -23,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
+builder.Services.AddScoped<ITageRepository, TageRepository>();
 var app = builder.Build();
 
 app.UseDefaultFiles();
