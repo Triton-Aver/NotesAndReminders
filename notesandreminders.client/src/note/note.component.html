@@ -21,6 +21,9 @@
             <td>
               <h2> {{p?.header}} </h2>
               <p>{{p?.description}}</p>
+              <p *ngFor="let f of p.tags">
+                #{{f?.tagName}}
+              </p>
             </td>
             <td>
               <div class="btn-group">

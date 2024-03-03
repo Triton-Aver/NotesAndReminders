@@ -24,7 +24,13 @@ describe('NoteComponent', () => {
 
   it('should retrieve weather forecasts from the server', () => {
     const mockNotes = [
-      { NoteId: 0, Header: 'Test', Description: 'Test', DateCreate: new Date('2021-10-01') }
+      {
+        noteId: 0,
+        header: 'Test',
+        description: 'Test',
+        dateCreate: new Date('2021-10-01'),
+        tags: [{ tageId: 1, name: 'Tag 1' }]
+      }
     ];
 
 

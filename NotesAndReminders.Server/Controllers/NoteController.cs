@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using NotesAndReminders.DataBase.Models;
 using NotesAndReminders.Server.Interfaces;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System;
 
 namespace NotesAndReminders.Server.Controllers
 {
@@ -20,8 +23,16 @@ namespace NotesAndReminders.Server.Controllers
         [HttpGet(Name = "GetNotes")]
         public IEnumerable<Note> Get()
         {
-            IEnumerable<Note> notes =  _noteRepo.GetAll();            
-            return notes.ToArray();
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            };
+
+            IEnumerable<Note> notes =  _noteRepo.GetAll(includeProperties:"Tags");
+            var json = JsonSerializer.Serialize(notes, jsonSerializerOptions);
+            notes = JsonSerializer.Deserialize<IEnumerable<Note>>(json, jsonSerializerOptions);
+
+            return notes;
         }
         [HttpGet("{id}")]
         public Note Get(int id)

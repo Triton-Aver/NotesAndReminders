@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotesAndReminders.DataBase.Context;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NotesAndReminders.DataBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240303084524_removeFK_inTage")]
+    partial class removeFK_inTage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace NotesAndReminders.DataBase.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("NoteTage", b =>
-                {
-                    b.Property<int>("NoteId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("NoteId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("NoteTage");
-                });
 
             modelBuilder.Entity("NotesAndReminders.DataBase.Models.Note", b =>
                 {
@@ -89,28 +77,18 @@ namespace NotesAndReminders.DataBase.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
 
+                    b.Property<int?>("NoteId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("TagId");
 
+                    b.HasIndex("NoteId");
+
                     b.ToTable("Tages");
-                });
-
-            modelBuilder.Entity("NoteTage", b =>
-                {
-                    b.HasOne("NotesAndReminders.DataBase.Models.Note", null)
-                        .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NotesAndReminders.DataBase.Models.Tage", null)
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("NotesAndReminders.DataBase.Models.Reminder", b =>
@@ -122,6 +100,18 @@ namespace NotesAndReminders.DataBase.Migrations
                         .IsRequired();
 
                     b.Navigation("Note");
+                });
+
+            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Tage", b =>
+                {
+                    b.HasOne("NotesAndReminders.DataBase.Models.Note", null)
+                        .WithMany("Tages")
+                        .HasForeignKey("NoteId");
+                });
+
+            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Note", b =>
+                {
+                    b.Navigation("Tages");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using NotesAndReminders.DataBase.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using NotesAndReminders.DataBase.Context;
 using NotesAndReminders.DataBase.Models;
 using NotesAndReminders.Server.Interfaces;
 
@@ -20,7 +21,7 @@ namespace NotesAndReminders.Server.Repositories
             {
                 objFromDb.Header = obj.Header;
                 objFromDb.Description = obj.Description;
-            }
+            }            
         }
     }
 }

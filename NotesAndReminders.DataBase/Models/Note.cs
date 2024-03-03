@@ -11,6 +11,6 @@ namespace NotesAndReminders.DataBase.Models
         public string Description { get; set; } = string.Empty;  //содержание заметки
         public DateTime DateCreate { get; set; } //Дата создания заметка
         [ForeignKey(nameof(NoteId))]
-        public List<Tage> Tages { get; set; }
+        public ICollection<Tage> Tags { get; set; }
     }
 }
