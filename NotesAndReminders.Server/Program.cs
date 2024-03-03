@@ -24,6 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<ITageRepository, TageRepository>();
+builder.Services.AddScoped<IReminderRepository, ReminderRepository>();
 var app = builder.Build();
 
 app.UseDefaultFiles();
