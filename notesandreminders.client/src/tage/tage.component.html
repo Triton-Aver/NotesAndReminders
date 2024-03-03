@@ -1,1 +1,62 @@
-<p>tage works!</p>
+<div class="container">
+  <div class="row p-1">
+    <h1>Ваши Тэги</h1>
+  </div>
+  <div class="row p-1">
+    <div class="col-2">
+      <input type="button" value="Добавить" class="btn btn-primary" (click)="add()" />
+    </div>
+  </div>
+  <div class="row p-1">
+    <table *ngIf="tableMode; else create" class="table table-striped">
+      <thead>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of tages">
+          <ng-template [ngIf]="tage.tagId != p.tagId" [ngIfElse]="edit">
+            <td>
+              <p> {{p?.tagName}} </p>              
+            </td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-primary" (click)="editTage(p)">Изменить</button>
+                <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+              </div>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="tage.tagName" class="form-control" />
+  </td>  
+  <td>
+    <div class="btn-group">
+      <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </div>
+  </td>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+  <div class="form-group">
+    <label>Название тэга</label>
+    <input type="text" [(ngModel)]="tage.tagName" class="form-control" />
+  </div>  
+  <div>
+    <div class="btn-group p-2">
+      <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+  </div>
+</ng-template>
