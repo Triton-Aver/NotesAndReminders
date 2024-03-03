@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NotesAndReminders.DataBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240303091012_addFK_inNote_addFK_inTage")]
-    partial class addFK_inNote_addFK_inTage
+    [Migration("20240303183823_createDb")]
+    partial class createDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace NotesAndReminders.DataBase.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("NoteTage", b =>
-                {
-                    b.Property<int>("NoteId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("NoteId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("NoteTage");
-                });
 
             modelBuilder.Entity("NotesAndReminders.DataBase.Models.Note", b =>
                 {
@@ -67,17 +52,17 @@ namespace NotesAndReminders.DataBase.Migrations
             modelBuilder.Entity("NotesAndReminders.DataBase.Models.Reminder", b =>
                 {
                     b.Property<int>("ReminderId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DeadLine")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ReminderId"));
+
+                    b.Property<DateTimeOffset>("DeadLine")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ReminderId");
 
@@ -99,32 +84,6 @@ namespace NotesAndReminders.DataBase.Migrations
                     b.HasKey("TagId");
 
                     b.ToTable("Tages");
-                });
-
-            modelBuilder.Entity("NoteTage", b =>
-                {
-                    b.HasOne("NotesAndReminders.DataBase.Models.Note", null)
-                        .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NotesAndReminders.DataBase.Models.Tage", null)
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Reminder", b =>
-                {
-                    b.HasOne("NotesAndReminders.DataBase.Models.Note", "Note")
-                        .WithMany()
-                        .HasForeignKey("ReminderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Note");
                 });
 #pragma warning restore 612, 618
         }

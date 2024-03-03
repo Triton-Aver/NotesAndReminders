@@ -21,9 +21,9 @@
             <td>
               <h2> {{p?.header}} </h2>
               <p>{{p?.description}}</p>
-              <p *ngFor="let f of p.tags">
-                #{{f?.tagName}}
-              </p>
+              <!--<p *ngFor="let f of p.tags">
+    #{{f?.tagName}}
+  </p>-->
             </td>
             <td>
               <div class="btn-group">
@@ -46,16 +46,16 @@
   <td>
     <input type="text" [(ngModel)]="note.description" class="form-control" />
   </td>
-  <td>
+  <!--<td>-->
     <!-- Using Items Input -->
-    <ng-select [items]="cars"
+    <!--<ng-select [items]="cars"
                bindLabel="name"
                placeholder="Select Tags"
                appendTo="body"
                [multiple]="true"
                [(ngModel)]="note.tags">
     </ng-select>
-  </td>
+  </td>-->
   <td>
     <div class="btn-group">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
@@ -74,16 +74,16 @@
     <label>Содержание</label>
     <input type="text" [(ngModel)]="note.description" class="form-control" />
   </div>
-  <div>
+  <!--<div>-->
     <!-- Using Items Input -->
-    <ng-select [items]="cars"
+    <!--<ng-select [items]="cars"
                bindLabel="name"
                placeholder="Select Tags"
                appendTo="body"
                [multiple]="true"
                [(ngModel)]="note.tags">
     </ng-select>
-  </div>
+  </div>-->
   <div>
     <div class="btn-group p-2">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

@@ -30,7 +30,7 @@ namespace NotesAndReminders.DataBase.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("NoteId"));
 
-                    b.Property<DateTimeOffset>("DateCreate")
+                    b.Property<DateTime>("DateCreate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -41,12 +41,7 @@ namespace NotesAndReminders.DataBase.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("TagId")
-                        .HasColumnType("integer");
-
                     b.HasKey("NoteId");
-
-                    b.HasIndex("TagId");
 
                     b.ToTable("Notes");
                 });
@@ -54,7 +49,10 @@ namespace NotesAndReminders.DataBase.Migrations
             modelBuilder.Entity("NotesAndReminders.DataBase.Models.Reminder", b =>
                 {
                     b.Property<int>("ReminderId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ReminderId"));
 
                     b.Property<DateTimeOffset>("DeadLine")
                         .HasColumnType("timestamp with time zone");
@@ -62,9 +60,6 @@ namespace NotesAndReminders.DataBase.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTimeOffset>("DueDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ReminderId");
 
@@ -86,29 +81,6 @@ namespace NotesAndReminders.DataBase.Migrations
                     b.HasKey("TagId");
 
                     b.ToTable("Tages");
-                });
-
-            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Note", b =>
-                {
-                    b.HasOne("NotesAndReminders.DataBase.Models.Tage", null)
-                        .WithMany("Notes")
-                        .HasForeignKey("TagId");
-                });
-
-            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Reminder", b =>
-                {
-                    b.HasOne("NotesAndReminders.DataBase.Models.Note", "Note")
-                        .WithMany()
-                        .HasForeignKey("ReminderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Note");
-                });
-
-            modelBuilder.Entity("NotesAndReminders.DataBase.Models.Tage", b =>
-                {
-                    b.Navigation("Notes");
                 });
 #pragma warning restore 612, 618
         }

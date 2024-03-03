@@ -22,7 +22,7 @@ namespace NotesAndReminders.Server.Controllers
         [HttpGet]
         public IEnumerable<Reminder> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _reminRepo.GetAll();
         }
 
         // GET api/<ReminderController>/5

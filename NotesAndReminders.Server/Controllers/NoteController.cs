@@ -28,7 +28,7 @@ namespace NotesAndReminders.Server.Controllers
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
 
-            IEnumerable<Note> notes =  _noteRepo.GetAll(includeProperties:"Tags");
+            IEnumerable<Note> notes =  _noteRepo.GetAll();
             var json = JsonSerializer.Serialize(notes, jsonSerializerOptions);
             notes = JsonSerializer.Deserialize<IEnumerable<Note>>(json, jsonSerializerOptions);
 

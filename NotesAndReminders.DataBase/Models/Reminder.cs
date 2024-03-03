@@ -7,11 +7,7 @@ namespace NotesAndReminders.DataBase.Models
     {
         [Key]
         public int ReminderId { get; set; }
-        public string Description { get; set; }
-        public DateTimeOffset DeadLine { get; set; }    //Дата напоминания        
-        public DateTimeOffset DueDate { get; set; }
-
-        [ForeignKey(nameof(ReminderId))]
-        public Note? Note { get; set; }
+        public string Description { get; set; }        
+        public DateTimeOffset DeadLine { get; set; }    //Дата напоминания           
     }
 }
