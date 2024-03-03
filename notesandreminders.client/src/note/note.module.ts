@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from "@ng-select/ng-select"; 
-
+import { DatePickerComponent } from '../app/date-picker/date-picker.component';
 import { NoteComponent } from './note.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [NoteComponent],
   imports: [
     BrowserModule, HttpClientModule,
-    FormsModule, NgSelectModule
+    FormsModule, NgSelectModule, NgbModule, DatePickerComponent
   ],
     providers: [],
   bootstrap: [NoteComponent]

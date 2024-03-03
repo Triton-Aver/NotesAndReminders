@@ -11,7 +11,7 @@ export class NoteComponent implements OnInit {
   private url = 'https://localhost:7156/api/Note';
   public note: Note = new Note();
   public notes: Note[] = [];
-  
+  dateTime = Date;
   tableMode: boolean = true;
   constructor(private http: HttpClient) { }
 

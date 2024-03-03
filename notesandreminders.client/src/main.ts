@@ -1,3 +1,5 @@
+/// <reference types="@angular/localize" />
+
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NoteModule } from './note/note.module';
 import { TageModule } from './tage/tage.module';

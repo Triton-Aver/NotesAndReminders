@@ -22,8 +22,8 @@
               <h2> {{p?.header}} </h2>
               <p>{{p?.description}}</p>
               <!--<p *ngFor="let f of p.tags">
-    #{{f?.tagName}}
-  </p>-->
+                #{{f?.tagName}}
+              </p>-->
             </td>
             <td>
               <div class="btn-group">
@@ -74,9 +74,13 @@
     <label>Содержание</label>
     <input type="text" [(ngModel)]="note.description" class="form-control" />
   </div>
+  <div class="form-group">
+    <label>Срок</label>
+    <input class="form-control" type="datetime-local" [(ngModel)]="note.dateCreate" placeholder="Срок выполнения" id="example-datetime-local-input">
+  </div>
   <!--<div>-->
-    <!-- Using Items Input -->
-    <!--<ng-select [items]="cars"
+  <!-- Using Items Input -->
+  <!--<ng-select [items]="cars"
                bindLabel="name"
                placeholder="Select Tags"
                appendTo="body"
