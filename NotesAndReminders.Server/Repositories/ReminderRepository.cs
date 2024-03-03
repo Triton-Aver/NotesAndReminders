@@ -15,7 +15,11 @@ namespace NotesAndReminders.Server.Repositories
         
         public void Update(Reminder reminder)
         {
-            throw new NotImplementedException();
+            var objFromDb = base.FirstOrDefault(u => u.ReminderId == reminder.ReminderId);
+            if (objFromDb != null)
+            {
+                objFromDb.Description = reminder.Description;
+            }
         }
     }
 }

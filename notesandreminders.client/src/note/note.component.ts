@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Note } from './note';
-import { TageModule } from '../tage/tage.module'
 
 @Component({
   selector: 'app-note',
