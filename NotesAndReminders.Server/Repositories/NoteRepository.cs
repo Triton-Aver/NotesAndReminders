@@ -16,6 +16,7 @@ namespace NotesAndReminders.Server.Repositories
 
         public void Update(Note obj)
         {
+            //TODO нужно обработать удаление тэгов
             var objFromDb = _db.Notes.Include(u => u.Tags).FirstOrDefault(u => u.NoteId == obj.NoteId);
             if (objFromDb != null)
             {
