@@ -9,7 +9,7 @@ namespace NotesAndReminders.DataBase.Models
         public int NoteId { get; set; }
         public string Header { get; set; } = string.Empty;       //заголовок
         public string Description { get; set; } = string.Empty;  //содержание заметки
-        public DateTimeOffset DateCreate { get; set; } = DateTimeOffset.Now; //Дата создания заметка       
-        
+        public DateTimeOffset DateCreate { get; set; } = DateTimeOffset.Now; //Дата создания заметка                                                                                     
+        public ICollection<NoteTag> NoteTags { get; set; }
     }
 }
