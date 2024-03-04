@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Tage } from './tage';
+import { AppService } from '../app/app.service';
 
 @Component({
   selector: 'app-tage',
@@ -12,11 +13,13 @@ export class TageComponent implements OnInit {
   public tage: Tage = new Tage();
   public tages: Tage[] = [];
   tableMode: boolean = true;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private appService: AppService) { }
 
   ngOnInit() {
     this.getTages();
-  }
+    this.appService.methodCall$.subscribe(() => this.getTages());
+  }  
 
   // получаем данные через сервис
   getTages() {

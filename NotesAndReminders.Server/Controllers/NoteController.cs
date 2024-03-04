@@ -5,6 +5,7 @@ using NotesAndReminders.Server.Interfaces;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System;
+using System.Linq.Expressions;
 
 namespace NotesAndReminders.Server.Controllers
 {
@@ -28,7 +29,7 @@ namespace NotesAndReminders.Server.Controllers
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
 
-            IEnumerable<Note> notes =  _noteRepo.GetAll();
+            IEnumerable<Note> notes =  _noteRepo.GetAll(includeProperties: "Tags");
             var json = JsonSerializer.Serialize(notes, jsonSerializerOptions);
             notes = JsonSerializer.Deserialize<IEnumerable<Note>>(json, jsonSerializerOptions);
 
@@ -37,7 +38,26 @@ namespace NotesAndReminders.Server.Controllers
         [HttpGet("{id}")]
         public Note Get(int id)
         {
-            Note note = _noteRepo.Find(id);
+            // Создание параметра для выражения
+            var noteParameter = Expression.Parameter(typeof(Note), "note");
+
+            // Создание выражения сравнения Id записки с конкретным значением
+            var comparison = Expression.Equal(
+                Expression.Property(noteParameter, nameof(Note.NoteId)),
+                Expression.Constant(id) // Предположим, что мы ищем записку с Id равным 1
+            );
+
+            // Создание выражения-делегата
+            var lambda = Expression.Lambda<Func<Note, bool>>(comparison, noteParameter);
+
+            Note note = _noteRepo.FirstOrDefault(filtr: lambda, includeProperties: "Tags");
+
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            };            
+            var json = JsonSerializer.Serialize(note, jsonSerializerOptions);
+            note = JsonSerializer.Deserialize<Note>(json, jsonSerializerOptions);
             return note;
         }
 
@@ -46,9 +66,9 @@ namespace NotesAndReminders.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                _noteRepo.Add(note);
-                _noteRepo.Save();
-                //_noteRepo.CreateNote(note);
+                //_noteRepo.Add(note);
+                //_noteRepo.Save();
+                _noteRepo.CreateNote(note);
                 return Ok(note);
             }
             return BadRequest(ModelState);

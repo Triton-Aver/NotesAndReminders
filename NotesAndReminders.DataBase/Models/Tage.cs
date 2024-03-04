@@ -8,6 +8,7 @@ namespace NotesAndReminders.DataBase.Models
         [Key]
         public int TagId { get; set; }
         public string TagName { get; set; } = string.Empty;    //название тэга
-        public ICollection<NoteTag> NoteTags { get; set; }
+        [ForeignKey(nameof(TagId))]
+        public IEnumerable<Note>? Notes { get; set; } = new List<Note>();
     }
 }
