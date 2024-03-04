@@ -20,7 +20,7 @@
             <td>              
               <p>{{p?.description}}</p>             
             </td>
-            <td>
+            <td class="col-button">
               <div class="btn-group">
                 <button class="btn btn-sm btn-primary" (click)="editReminder(p)">Изменить</button>
                 <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
@@ -38,7 +38,7 @@
   <td>
     <input type="text" [(ngModel)]="reminder.description" class="form-control" />
   </td>  
-  <td>
+  <td class="col-button">
     <div class="btn-group">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
       <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />

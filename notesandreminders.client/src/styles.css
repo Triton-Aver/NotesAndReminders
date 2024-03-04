@@ -1,6 +1,9 @@
 body{
-    padding: 20px;
+    padding: 20px;    
 }
-.container{
-    padding:10px;
+.container {
+  padding: 10px;    
+}
+td, .col-button {
+  vertical-align: middle;
 }
