@@ -21,9 +21,9 @@
             <td>
               <h2> {{p?.header}} </h2>
               <p>{{p?.description}}</p>
-              <!--<p *ngFor="let f of p.noteTags">
-                #{{f.tag.tagName?}}
-              </p>-->
+              <p *ngFor="let f of p.tags">
+                #{{f?.tagName}}
+              </p>
             </td>
             <td class="col-button">
               <div class="btn-group">
@@ -47,13 +47,13 @@
     <input type="text" [(ngModel)]="note.description" class="form-control" />
   </td>
   <td>
-     Using Items Input 
+     <!--Using Items Input--> 
     <ng-select [items]="cars"
                bindLabel="name"
                placeholder="Select Tags"
                appendTo="body"
                [multiple]="true"
-               [(ngModel)]="note.noteTags">
+               [(ngModel)]="note.tags">
     </ng-select>
   </td>
   <td class="col-button">
@@ -78,16 +78,16 @@
     <label>Срок</label>
     <input class="form-control" type="datetime-local" [(ngModel)]="note.dateCreate" placeholder="Срок выполнения" id="example-datetime-local-input">
   </div>
-  <!--<div>-->
-  <!-- Using Items Input -->
-  <!--<ng-select [items]="cars"
-               bindLabel="name"
+  <div>
+   <!--Using Items Input--> 
+  <ng-select [items]="cars"
+               bindLabel="tagName"
                placeholder="Select Tags"
                appendTo="body"
                [multiple]="true"
                [(ngModel)]="note.tags">
     </ng-select>
-  </div>-->
+  </div>
   <div>
     <div class="btn-group p-2">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

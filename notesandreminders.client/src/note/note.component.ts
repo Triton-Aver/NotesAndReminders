@@ -1,8 +1,6 @@
 import { Component, OnInit, input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Note } from './note';
-import { AppService } from '../app/app.service'
-import { Tage } from '../tage/tage';
 
 @Component({
   selector: 'app-note',
@@ -11,32 +9,26 @@ import { Tage } from '../tage/tage';
 })
 export class NoteComponent implements OnInit {
   private url = 'https://localhost:7156/api/Note';
-  private urlTag = 'https://localhost:7156/api/Tage';
   public note: Note = new Note();
   public notes: Note[] = [];
-  public tags: Tage[] = [];
   dateTime = Date;
   tableMode: boolean = true;
-  constructor(private http: HttpClient,
-              private appService: AppService) { }
+  constructor(private http: HttpClient) { }
 
   title = "geeksforgeeks-multiSelect";
-  //cars = this.nnn();
+  
   cars = [
-    { id: 6, name: "базовый" },
-    { id: 5, name: "работа" },
+    { tagId: 1, tagName: "Работа" },
+    { tagId: 2, tagName: "Дом" },
+    { tagId: 3, tagName: "Учёба" },
   ];
-  selected = [{ id: 6, name: "базовый" }];
+  selected = [{ tagId: 2, tagName: "Дом" }];
 
 
   ngOnInit() {
-    this.getNotes();
-    this.callMethod();
+    this.getNotes();    
   }
-
-  callMethod() {
-    this.appService.callMethod();
-  }
+    
   // получаем данные через сервис
   getNotes() {
     this.http.get<Note[]>(this.url).subscribe(
@@ -53,7 +45,7 @@ export class NoteComponent implements OnInit {
   }
 
   updateNote(note: Note) {
-    return this.http.put(this.url, note);
+    return this.http.put(this.url, this.note);
   }
 
   // сохранение данных  

@@ -1,7 +1,8 @@
-import { NoteTag } from "../models/NoteTags"
+import { Note } from "../note/note";
+
 export class Tage {
   constructor(
     public tagId?: number,
     public tagName?: string,
-    public noteTags?: NoteTag[]) { }
+    public notes?: Note[]) { }
 }

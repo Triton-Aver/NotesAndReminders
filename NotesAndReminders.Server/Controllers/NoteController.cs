@@ -62,7 +62,7 @@ namespace NotesAndReminders.Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Note note)
+        public IActionResult Post([FromBody] Note note)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace NotesAndReminders.Server.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put(Note note)
+        public IActionResult Put([FromBody] Note note)
         {
             if (ModelState.IsValid)
             {

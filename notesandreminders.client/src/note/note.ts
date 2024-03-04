@@ -1,4 +1,4 @@
-import { NoteTag } from "../models/NoteTags";
+import { Tage } from "../tage/tage";
 
 export class Note {
   constructor(
@@ -6,5 +6,5 @@ export class Note {
     public header?: string,
     public description?: string,
     public dateCreate?: Date,
-    public noteTags?: NoteTag[]) { }
+    public tags?: Tage[]) { }
 }

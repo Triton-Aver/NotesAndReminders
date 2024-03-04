@@ -16,11 +16,23 @@ namespace NotesAndReminders.Server.Repositories
 
         public void Update(Note obj)
         {
-            var objFromDb = base.FirstOrDefault(u => u.NoteId == obj.NoteId);
+            var objFromDb = _db.Notes.Include(u => u.Tags).FirstOrDefault(u => u.NoteId == obj.NoteId);
             if (objFromDb != null)
             {
                 objFromDb.Header = obj.Header;
                 objFromDb.Description = obj.Description;
+                foreach (var tags in obj.Tags)
+                {
+                    Tage tag = _db.Tages.Find(tags.TagId);
+                    if (objFromDb.Tags.Where(u => u.TagId == tag.TagId).Count() == 0)
+                    {
+                        objFromDb.Tags.Add(tag);
+                    }
+                    else
+                    {
+                        objFromDb.Tags.Remove(tag);
+                    }
+                }                
             }            
         }
 
