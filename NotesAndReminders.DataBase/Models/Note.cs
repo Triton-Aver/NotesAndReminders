@@ -10,6 +10,9 @@ namespace NotesAndReminders.DataBase.Models
         public string Header { get; set; } = string.Empty;       //заголовок
         public string Description { get; set; } = string.Empty;  //содержание заметки
         public DateTimeOffset DateCreate { get; set; } = DateTimeOffset.Now; //Дата создания заметка
+
+        [ForeignKey(nameof(Reminder))]
+        public Reminder? ReminderNote { get; set; }
         [ForeignKey(nameof(NoteId))]
         public ICollection<Tage>? Tags { get; set; } = new List<Tage>();
     }

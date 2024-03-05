@@ -23,7 +23,7 @@ export class NoteComponent implements OnInit {
   
   ngOnInit() {
     this.getNotes();
-    this.getTages();
+    
   }
    
   // получаем данные через сервис
@@ -70,6 +70,7 @@ export class NoteComponent implements OnInit {
     this.cancel();
   }
   editNote(p: Note) {
+    this.getTages();
     this.note = p;
   }
   cancel() {
@@ -82,6 +83,7 @@ export class NoteComponent implements OnInit {
   }
 
   add() {
+    this.getTages();
     this.cancel();
     this.tableMode = false;
   }

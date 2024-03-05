@@ -11,14 +11,18 @@
     <table *ngIf="tableMode; else create" class="table table-striped">
       <thead>
         <tr>
-          <td></td>          
+          <td></td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let p of reminders">
           <ng-template [ngIf]="reminder.reminderId != p.reminderId" [ngIfElse]="edit">
-            <td>              
-              <p>{{p?.description}}</p>             
+            <td>
+              <p>{{p?.description}}</p>
+            </td>
+            <td>
+              <p>{{p?.deadLine | date:'dd.MM.yyyy HH:mm'}}</p>
             </td>
             <td class="col-button">
               <div class="btn-group">
@@ -47,11 +51,15 @@
 </ng-template>
 
 <!--шаблон для добавления-->
-<ng-template #create>  
+<ng-template #create>
   <div class="form-group">
     <label>Содержание</label>
     <input type="text" [(ngModel)]="reminder.description" class="form-control" />
-  </div>  
+  </div>
+  <div class="form-group">
+    <label>Срок</label>
+    <input class="form-control" type="datetime-local" [(ngModel)]="reminder.deadLine" placeholder="Срок выполнения" id="example-datetime-local-input">
+  </div>
   <div>
     <div class="btn-group p-2">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
