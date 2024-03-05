@@ -7,5 +7,6 @@ namespace NotesAndReminders.Server.Interfaces
     {
         void Update(Note obj);
         void CreateNote(Note obj);
+        void RemoveNote(Note obj);
     }
 }

@@ -92,8 +92,7 @@ namespace NotesAndReminders.Server.Controllers
             Note note = _noteRepo.Find(id);
             if (note != null)
             {
-                _noteRepo.Remove(note);
-                _noteRepo.Save();
+                _noteRepo.RemoveNote(note);
             }
             return Ok(note);
         }

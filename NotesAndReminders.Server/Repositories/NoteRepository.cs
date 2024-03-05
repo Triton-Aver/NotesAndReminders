@@ -41,7 +41,6 @@ namespace NotesAndReminders.Server.Repositories
                 }
             }            
         }
-
         public void CreateNote(Note obj) 
         {
             Note note = new Note
@@ -61,6 +60,18 @@ namespace NotesAndReminders.Server.Repositories
             //{
             //    _db.Database.ExecuteSqlRaw(@$"INSERT INTO public.""NoteTage"" (""NoteId"", ""TagId"") VALUES ({obj.NoteId}, {tag.TagId});");
             //}
+        }
+
+        public void RemoveNote(Note obj)
+        {
+            Note chekReminder = _db.Notes.Include(u => u.ReminderNote).FirstOrDefault(u => u.NoteId == obj.NoteId);
+            _db.Notes.Remove(obj);
+            if (chekReminder.ReminderNote != null)
+            {
+                Reminder reminder = _db.Reminders.Find(chekReminder.ReminderNote.ReminderId);
+                _db.Reminders.Remove(reminder);
+            }
+            _db.SaveChanges();
         }
     }
 }
