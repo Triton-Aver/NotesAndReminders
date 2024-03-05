@@ -8,33 +8,35 @@
     </div>
   </div>
   <div class="row p-1">
-    <table *ngIf="tableMode; else create" class="table table-striped">
-      <thead>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of reminders">
-          <ng-template [ngIf]="reminder.reminderId != p.reminderId">
-            <td>
-              <p>{{p?.note?.header}}</p>
-            </td>
-            <td>
-              <p>{{p?.deadLine | date:'dd.MM.yyyy HH:mm'}}</p>
-            </td>            
-          </ng-template>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-4">
+      <table *ngIf="tableMode; else create" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Название заметки</th>
+            <th>Срок выполнения</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of reminders">
+            <ng-template [ngIf]="reminder.reminderId != p.reminderId">
+              <td>
+                <p>{{p?.note?.header}}</p>
+              </td>
+              <td>
+                <p>{{p?.deadLine | date:'dd.MM.yyyy HH:mm'}}</p>
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
 <!--шаблон для добавления-->
 <ng-template #create>
   <div class="form-group">
-    <!--Using Items Input-->
+    <label>Заметки</label>
     <ng-select [items]="notes"
                bindLabel="header"
                placeholder="Select Note"

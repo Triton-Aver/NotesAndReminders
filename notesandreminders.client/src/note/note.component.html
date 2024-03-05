@@ -13,7 +13,7 @@
         <tr>
           <th>Заметка</th>
           <th>Тэги</th>
-          <th>Срок</th>
+          <th>Дата создания</th>
           <th></th>
         </tr>
       </thead>
@@ -31,7 +31,7 @@
             </td>
             <td>
               <p>
-                {{p.reminderNote?.deadLine | date:'dd.MM.yyyy HH:mm'}}
+                {{p?.dateCreate | date:'dd.MM.yyyy HH:mm'}}
               </p>
             </td>
             <td class="col-button">
