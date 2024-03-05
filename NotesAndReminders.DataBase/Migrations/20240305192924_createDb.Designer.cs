@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NotesAndReminders.DataBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240305120941_removeDiscriptionInReminder")]
-    partial class removeDiscriptionInReminder
+    [Migration("20240305192924_createDb")]
+    partial class createDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

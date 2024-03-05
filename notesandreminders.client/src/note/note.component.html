@@ -62,7 +62,8 @@
                placeholder="Select Tags"
                appendTo="body"
                [multiple]="true"
-               [(ngModel)]="note.tags">
+               [(ngModel)]="note.tags"
+               [ngModelOptions]="{standalone: true}>
     </ng-select>
   </td>
   <td class="col-button">
