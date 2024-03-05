@@ -25,15 +25,7 @@ namespace NotesAndReminders.Server.Controllers
             IEnumerable<Tage> tage = _tageRepo.GetAll();
             return tage.ToArray();
         }
-
-        // GET api/<TageController>/5
-        [HttpGet("{id}")]
-        public Tage Get(int id)
-        {
-            Tage tage = _tageRepo.Find(id);
-            return tage;
-        }
-
+        
         // POST api/<TageController>
         [HttpPost]
         public IActionResult Post(Tage tage)
@@ -45,20 +37,7 @@ namespace NotesAndReminders.Server.Controllers
                 return Ok(tage);
             }
             return BadRequest(ModelState);
-        }
-
-        // PUT api/<TageController>/5
-        [HttpPut]
-        public IActionResult Put(Tage tage)
-        {
-            if (ModelState.IsValid)
-            {
-                _tageRepo.Update(tage);
-                _tageRepo.Save();
-                return Ok(tage);
-            }
-            return BadRequest(ModelState);
-        }
+        }        
 
         // DELETE api/<TageController>/5
         [HttpDelete("{id}")]

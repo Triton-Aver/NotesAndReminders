@@ -29,32 +29,20 @@ export class TageComponent implements OnInit {
       }
     );
   }
-  getTage(tagId: number) {
-    return this.http.get(this.url + '/' + tagId);
-  }
-
-  updateTage(tage: Tage) {
-    return this.http.put(this.url, tage);
-  }
-
+  
   // сохранение данных  
   save() {
     if (this.tage.tagId == null) {
       this.http.post(this.url, this.tage, { observe: 'response' })
         .subscribe(data => this.getTages());
-    } else {
-      this.http.put(this.url, this.tage)
-        .subscribe(data => this.getTages());
-    }
+    } 
     this.cancel();
-  }
-  editTage(p: Tage) {
-    this.tage = p;
-  }
+  }  
   cancel() {
     this.tage = new Tage;
     this.tableMode = true;
   }
+
   delete(p: Tage) {
     this.http.delete(this.url + '/' + p.tagId)
       .subscribe(data => this.getTages());

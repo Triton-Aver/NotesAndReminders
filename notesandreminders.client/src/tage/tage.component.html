@@ -18,13 +18,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let p of tages">
-            <ng-template [ngIf]="tage.tagId != p.tagId" [ngIfElse]="edit">
+            <ng-template [ngIf]="tage.tagId != p.tagId">
               <td>
                 <p> {{p?.tagName}} </p>
               </td>
               <td class="col-button">
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-primary" (click)="editTage(p)">Изменить</button>
+                <div class="btn-group">                  
                   <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
                 </div>
               </td>
@@ -35,19 +34,6 @@
     </div>
   </div>
 </div>
-
-<!--шаблон для редактирования-->
-<ng-template #edit>
-  <td>
-    <input type="text" [(ngModel)]="tage.tagName" class="form-control" />
-  </td>
-  <td class="col-button">
-    <div class="btn-group">
-      <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
-      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
-    </div>
-  </td>
-</ng-template>
 
 <!--шаблон для добавления-->
 <ng-template #create>

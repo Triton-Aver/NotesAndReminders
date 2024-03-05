@@ -1,7 +1,6 @@
 import { Component, OnInit, input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Note } from './note';
-import { AllService } from '../all.service'
 import { Tage } from '../tage/tage';
 import { Reminder } from '../reminder/reminder';
 
@@ -21,7 +20,7 @@ export class NoteComponent implements OnInit {
   public tages: Tage[] = [];
   public reminder: Reminder = new Reminder();
 
-  constructor(private http: HttpClient, private allService: AllService) { }
+  constructor(private http: HttpClient) { }
   
   ngOnInit() {
     this.getNotes();

@@ -11,16 +11,7 @@ namespace NotesAndReminders.Server.Repositories
         public ReminderRepository(ApplicationContext db) : base(db)
         {
             _db = db;
-        }
-        
-        public void Update(Reminder reminder)
-        {
-            var objFromDb = base.FirstOrDefault(u => u.ReminderId == reminder.ReminderId);
-            if (objFromDb != null)
-            {
-                objFromDb.Description = reminder.Description;
-            }
-        }
+        }        
 
         public void CreateReminder(Reminder obj)
         {
@@ -33,11 +24,7 @@ namespace NotesAndReminders.Server.Repositories
                 reminder.Note = note;
             
             _db.Reminders.Add(reminder);
-            _db.SaveChanges();
-            //foreach(var tag in obj.Tags)
-            //{
-            //    _db.Database.ExecuteSqlRaw(@$"INSERT INTO public.""NoteTage"" (""NoteId"", ""TagId"") VALUES ({obj.NoteId}, {tag.TagId});");
-            //}
+            _db.SaveChanges();            
         }
     }
 }
