@@ -69,6 +69,7 @@ namespace NotesAndReminders.Server.Repositories
             if (chekReminder.ReminderNote != null)
             {
                 Reminder reminder = _db.Reminders.Find(chekReminder.ReminderNote.ReminderId);
+                _db.SaveChanges();
                 _db.Reminders.Remove(reminder);
             }
             _db.SaveChanges();

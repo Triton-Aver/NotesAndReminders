@@ -6,8 +6,7 @@ namespace NotesAndReminders.DataBase.Models
     public class Reminder
     {
         [Key]
-        public int ReminderId { get; set; }
-        public string? Description { get; set; }        
+        public int ReminderId { get; set; }             
         public DateTimeOffset DeadLine { get; set; }   //Дата напоминания        
         public Note? Note { get; set; }
     }

@@ -26,7 +26,7 @@ export class ReminderComponent implements OnInit {
   getNotes() {
     this.http.get<Note[]>(this.url1).subscribe(
       (result) => {
-        this.notes = result;
+        this.notes = result.filter(note=> note.reminderNote == null);
       },
       (error) => {
         console.error(error);
