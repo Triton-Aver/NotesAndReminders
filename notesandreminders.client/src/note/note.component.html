@@ -13,6 +13,7 @@
         <tr>
           <th>Заметка</th>
           <th>Тэги</th>
+          <th>Срок</th>
           <th></th>
         </tr>
       </thead>
@@ -26,6 +27,11 @@
             <td>
               <p *ngFor="let f of p.tags">
                 #{{f?.tagName}}
+              </p>
+            </td>
+            <td>
+              <p>
+                {{p.reminderNote?.deadLine | date:'dd.MM.yyyy HH:mm'}}
               </p>
             </td>
             <td class="col-button">
@@ -87,11 +93,7 @@
                [multiple]="true"
                [(ngModel)]="note.tags">
     </ng-select>
-  </div>
-  <div class="form-group col-3">
-    <label>Срок</label>
-    <input class="form-control" type="datetime-local" [(ngModel)]="note.dateCreate" placeholder="Срок выполнения" id="example-datetime-local-input">
-  </div>
+  </div>  
   <div>
     <div class="btn-group p-2">
       <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />

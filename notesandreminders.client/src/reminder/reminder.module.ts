@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from "@ng-select/ng-select"; 
 
 import { ReminderComponent } from './reminder.component';
 
@@ -9,7 +10,7 @@ import { ReminderComponent } from './reminder.component';
   declarations: [ReminderComponent],
   imports: [
     BrowserModule, HttpClientModule,
-    FormsModule
+    FormsModule, NgSelectModule
   ],
   providers: [],
   bootstrap: [ReminderComponent]

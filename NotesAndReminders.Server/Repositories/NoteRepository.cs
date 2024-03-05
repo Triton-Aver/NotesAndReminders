@@ -18,10 +18,13 @@ namespace NotesAndReminders.Server.Repositories
         {
             //TODO нужно обработать удаление тэгов
             var objFromDb = _db.Notes.Include(u => u.Tags).FirstOrDefault(u => u.NoteId == obj.NoteId);
+
             if (objFromDb != null)
             {
                 objFromDb.Header = obj.Header;
                 objFromDb.Description = obj.Description;
+                objFromDb.ReminderNote = obj.ReminderNote;
+
                 foreach (var tags in obj.Tags)
                 {
                     Tage tag = _db.Tages.Find(tags.TagId);
@@ -32,8 +35,10 @@ namespace NotesAndReminders.Server.Repositories
                     else
                     {
                         objFromDb.Tags.Remove(tag);
+                        _db.SaveChanges();
+                        objFromDb.Tags.Add(tag);
                     }
-                }                
+                }
             }            
         }
 

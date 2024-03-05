@@ -29,7 +29,7 @@ namespace NotesAndReminders.Server.Controllers
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
 
-            IEnumerable<Note> notes =  _noteRepo.GetAll(includeProperties: "Tags");
+            IEnumerable<Note> notes =  _noteRepo.GetAll(includeProperties: "Tags,ReminderNote");
             var json = JsonSerializer.Serialize(notes, jsonSerializerOptions);
             notes = JsonSerializer.Deserialize<IEnumerable<Note>>(json, jsonSerializerOptions);
 
@@ -50,7 +50,7 @@ namespace NotesAndReminders.Server.Controllers
             // Создание выражения-делегата
             var lambda = Expression.Lambda<Func<Note, bool>>(comparison, noteParameter);
 
-            Note note = _noteRepo.FirstOrDefault(filtr: lambda, includeProperties: "Tags");
+            Note note = _noteRepo.FirstOrDefault(filtr: lambda, includeProperties: "Tags,ReminderNote");
 
             JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
             {

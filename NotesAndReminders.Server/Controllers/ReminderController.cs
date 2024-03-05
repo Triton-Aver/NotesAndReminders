@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotesAndReminders.DataBase.Models;
 using NotesAndReminders.Server.Interfaces;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,52 +24,27 @@ namespace NotesAndReminders.Server.Controllers
         [HttpGet]
         public IEnumerable<Reminder> Get()
         {
-            return _reminRepo.GetAll();
-        }
+            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            };
 
-        // GET api/<ReminderController>/5
-        [HttpGet("{id}")]
-        public Reminder Get(int id)
-        {
-            Reminder reminder = _reminRepo.Find(id);
-            return reminder;
-        }
+            IEnumerable<Reminder> reminders = _reminRepo.GetAll(includeProperties:"Note");
+            var json = JsonSerializer.Serialize(reminders, jsonSerializerOptions);
+            reminders = JsonSerializer.Deserialize<IEnumerable<Reminder>>(json, jsonSerializerOptions);
 
+            return reminders;
+        }
+        
         [HttpPost]
         public IActionResult Post(Reminder reminder)
         {
             if (ModelState.IsValid)
             {
-                _reminRepo.Add(reminder);
-                _reminRepo.Save();
-                //_noteRepo.CreateNote(note);
+                _reminRepo.CreateReminder(reminder);                
                 return Ok(reminder);
             }
             return BadRequest(ModelState);
-        }
-
-        [HttpPut]
-        public IActionResult Put(Reminder reminder)
-        {
-            if (ModelState.IsValid)
-            {
-                _reminRepo.Update(reminder);
-                _reminRepo.Save();
-                return Ok(reminder);
-            }
-            return BadRequest(ModelState);
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            Reminder reminder = _reminRepo.Find(id);
-            if (reminder != null)
-            {
-                _reminRepo.Remove(reminder);
-                _reminRepo.Save();
-            }
-            return Ok(reminder);
-        }
+        }        
     }
 }

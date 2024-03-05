@@ -17,19 +17,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let p of reminders">
-          <ng-template [ngIf]="reminder.reminderId != p.reminderId" [ngIfElse]="edit">
+          <ng-template [ngIf]="reminder.reminderId != p.reminderId">
             <td>
-              <p>{{p?.description}}</p>
+              <p>{{p?.note?.header}}</p>
             </td>
             <td>
               <p>{{p?.deadLine | date:'dd.MM.yyyy HH:mm'}}</p>
-            </td>
-            <td class="col-button">
-              <div class="btn-group">
-                <button class="btn btn-sm btn-primary" (click)="editReminder(p)">Изменить</button>
-                <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
-              </div>
-            </td>
+            </td>            
           </ng-template>
         </tr>
       </tbody>
@@ -37,24 +31,17 @@
   </div>
 </div>
 
-<!--шаблон для редактирования-->
-<ng-template #edit>  
-  <td>
-    <input type="text" [(ngModel)]="reminder.description" class="form-control" />
-  </td>  
-  <td class="col-button">
-    <div class="btn-group">
-      <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
-      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
-    </div>
-  </td>
-</ng-template>
-
 <!--шаблон для добавления-->
 <ng-template #create>
   <div class="form-group">
-    <label>Содержание</label>
-    <input type="text" [(ngModel)]="reminder.description" class="form-control" />
+    <!--Using Items Input-->
+    <ng-select [items]="notes"
+               bindLabel="header"
+               placeholder="Select Note"
+               appendTo="body"
+               [multiple]="false"
+               [(ngModel)]="reminder.note">
+    </ng-select>
   </div>
   <div class="form-group">
     <label>Срок</label>

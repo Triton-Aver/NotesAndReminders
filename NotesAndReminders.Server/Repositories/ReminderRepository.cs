@@ -21,5 +21,23 @@ namespace NotesAndReminders.Server.Repositories
                 objFromDb.Description = reminder.Description;
             }
         }
+
+        public void CreateReminder(Reminder obj)
+        {
+            Reminder reminder = new Reminder
+            {
+                DeadLine = obj.DeadLine,               
+            };
+            
+                Note note = _db.Notes.Find(obj.Note.NoteId);
+                reminder.Note = note;
+            
+            _db.Reminders.Add(reminder);
+            _db.SaveChanges();
+            //foreach(var tag in obj.Tags)
+            //{
+            //    _db.Database.ExecuteSqlRaw(@$"INSERT INTO public.""NoteTage"" (""NoteId"", ""TagId"") VALUES ({obj.NoteId}, {tag.TagId});");
+            //}
+        }
     }
 }
