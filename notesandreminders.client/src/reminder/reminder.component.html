@@ -35,24 +35,22 @@
 
 <!--шаблон для добавления-->
 <ng-template #create>
-  <div class="form-group">
-    <label>Заметки</label>
-    <ng-select [items]="notes"
-               bindLabel="header"
-               placeholder="Select Note"
-               appendTo="body"
-               [multiple]="false"
-               [(ngModel)]="reminder.note">
-    </ng-select>
-  </div>
+  <label>Заметки</label>
+  <ng-select [items]="notes"
+             [(ngModel)]="reminder.note"
+             appendTo="body"
+             bindLabel="header"
+             [multiple]="false"
+             placeholder="Select Note">
+  </ng-select>
   <div class="form-group">
     <label>Срок</label>
     <input class="form-control" type="datetime-local" [(ngModel)]="reminder.deadLine" placeholder="Срок выполнения" id="example-datetime-local-input">
   </div>
   <div>
-    <div class="btn-group p-2">
-      <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
-      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    <div class="btn-group p-2">      
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />     
     </div>
   </div>
 </ng-template>

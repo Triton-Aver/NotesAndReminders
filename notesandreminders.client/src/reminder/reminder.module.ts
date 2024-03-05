@@ -10,7 +10,7 @@ import { ReminderComponent } from './reminder.component';
   declarations: [ReminderComponent],
   imports: [
     BrowserModule, HttpClientModule,
-    FormsModule, NgSelectModule
+    FormsModule, NgSelectModule 
   ],
   providers: [],
   bootstrap: [ReminderComponent]

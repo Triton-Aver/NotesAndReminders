@@ -75,29 +75,39 @@
 
 <!--шаблон для добавления-->
 <ng-template #create>
-  <div class="form-group">
-    <label>Заголовок</label>
-    <input type="text" [(ngModel)]="note.header" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label>Содержание</label>
-    <input type="text" [(ngModel)]="note.description" class="form-control" />
-  </div>
-  <div>
-    <label>Добавте тэги</label>
-    <!--Using Items Input-->
-    <ng-select [items]="tages"
-               bindLabel="tagName"
-               placeholder="Select Tags"
-               appendTo="body"
-               [multiple]="true"
-               [(ngModel)]="note.tags">
-    </ng-select>
-  </div>  
-  <div>
-    <div class="btn-group p-2">
-      <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
-      <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Заголовок</label>
+      <input type="text" [(ngModel)]="note.header" class="form-control" formControlName="header" />
+      <div *ngIf="f['header'].touched && f['header'].invalid" class="alert alert-danger">
+        <div *ngIf="f['header'].errors && f['header'].errors['required']">Header is required.</div>
+        <div *ngIf="f['header'].errors && f['header'].errors['minlength']">Header should be 4 character.</div>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label>Содержание</label>
+      <input type="text" [(ngModel)]="note.description" class="form-control" formControlName="description" />
+      <div *ngIf="f['description'].touched && f['description'].invalid" class="alert alert-danger">
+        <div *ngIf="f['description'].errors && f['description'].errors['required']">Description is required.</div>
+        <div *ngIf="f['description'].errors && f['description'].errors['minlength']">Description should be 4 character.</div>
+      </div>
+    </div>
+    <div>
+      <label>Добавте тэги</label>
+      <!--Using Items Input-->
+      <ng-select [items]="tages"
+                 bindLabel="tagName"
+                 placeholder="Select Tags"
+                 appendTo="body"
+                 [multiple]="true"
+                 [(ngModel)]="note.tags">
+      </ng-select>
+    </div>
+    <div>
+      <div class="btn-group p-2">
+        <input type="submit" value="Сохранить" (click)="save()" class="btn btn-success" [disabled]="form.invalid" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+      </div>
+    </div>
+    </form>
 </ng-template>

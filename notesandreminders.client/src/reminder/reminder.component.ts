@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Reminder } from './reminder';
 import { Note } from '../note/note';
 
+
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
@@ -21,6 +22,7 @@ export class ReminderComponent implements OnInit {
   ngOnInit() {
     this.getReminders();
   }
+   
 
   // получаем данные через сервис
   getNotes() {

@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoteComponent } from './note.component';
+import { Reminder } from '../reminder/reminder';
 
 describe('NoteComponent', () => {
   let component: NoteComponent;
@@ -18,23 +19,28 @@ describe('NoteComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve weather forecasts from the server', () => {
+  it('should retrieve Note from the server', () => {
     const mockNotes = [
       {
         noteId: 0,
         header: 'Test',
         description: 'Test',
-        dateCreate: new Date('2021-10-01'),
-        /*tags: [{ tageId: 1, name: 'Tag 1' }]*/
+        dateCreate: new Date(2013, 0, 32),
+        tags: [],
+        reminderNote: new Reminder()
       }
     ];
 
 
-    const req = httpMock.expectOne('/note');
+    const req = httpMock.expectOne('https://localhost:7156/api/Note');
     expect(req.request.method).toEqual('GET');
     req.flush(mockNotes);
 

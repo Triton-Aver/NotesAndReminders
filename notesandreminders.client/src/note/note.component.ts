@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Note } from './note';
 import { Tage } from '../tage/tage';
 import { Reminder } from '../reminder/reminder';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-note',
@@ -19,12 +20,25 @@ export class NoteComponent implements OnInit {
   public tage: Tage = new Tage();
   public tages: Tage[] = [];
   public reminder: Reminder = new Reminder();
-
+  
   constructor(private http: HttpClient) { }
   
   ngOnInit() {
     this.getNotes();
     
+  }
+
+  form = new FormGroup({
+    header: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(4)]),
+  });
+
+  get f() {
+    return this.form.controls;
+  }
+
+  submit() {
+    console.log(this.form.value);
   }
    
   // получаем данные через сервис

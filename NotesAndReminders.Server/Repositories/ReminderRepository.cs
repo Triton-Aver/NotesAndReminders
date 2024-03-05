@@ -19,12 +19,14 @@ namespace NotesAndReminders.Server.Repositories
             {
                 DeadLine = obj.DeadLine,               
             };
-            
+            if (obj.Note != null)
+            {
                 Note note = _db.Notes.Find(obj.Note.NoteId);
                 reminder.Note = note;
+                _db.Reminders.Add(reminder);
+                _db.SaveChanges();            
+            }   
             
-            _db.Reminders.Add(reminder);
-            _db.SaveChanges();            
         }
     }
 }

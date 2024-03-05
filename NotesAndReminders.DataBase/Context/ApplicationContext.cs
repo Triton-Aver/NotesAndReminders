@@ -8,7 +8,7 @@ namespace NotesAndReminders.DataBase.Context
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
         public DbSet<Tage> Tages { get; set; }
         public DbSet<Note> Notes { get; set; }
