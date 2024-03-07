@@ -8,7 +8,7 @@ import { Tage } from './tage';
   styleUrl: './tage.component.css'
 })
 export class TageComponent implements OnInit {
-  private url = 'https://localhost:7156/api/Tage';
+  private url = '/api/Tage';
   public tage: Tage = new Tage();
   public tages: Tage[] = [];
   tableMode: boolean = true;

@@ -39,7 +39,7 @@ describe('ReminderComponent', () => {
 
     component.ngOnInit();
 
-    const req = httpMock.expectOne('https://localhost:7156/api/Reminder');
+    const req = httpMock.expectOne('/api/Reminder');
     expect(req.request.method).toEqual('GET');
     req.flush(mockReminder);
 

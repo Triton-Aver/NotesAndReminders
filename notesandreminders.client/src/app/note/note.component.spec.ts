@@ -40,7 +40,7 @@ describe('NoteComponent', () => {
     ];
 
 
-    const req = httpMock.expectOne('https://localhost:7156/api/Note');
+    const req = httpMock.expectOne('/api/Note');
     expect(req.request.method).toEqual('GET');
     req.flush(mockNotes);
 

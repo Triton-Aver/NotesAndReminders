@@ -11,8 +11,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrl: './note.component.css'
 })
 export class NoteComponent implements OnInit {
-  private url1 = 'https://localhost:7156/api/Tage';
-  private url = 'https://localhost:7156/api/Note';
+  private url1 = '/api/Tage';
+  private url = '/api/Note';
   public note: Note = new Note();
   public notes: Note[] = [];
   dateTime = Date;

@@ -11,8 +11,8 @@ import { Note } from '../note/note';
 })
 export class ReminderComponent implements OnInit {
 
-  private url = 'https://localhost:7156/api/Reminder';
-  private url1 = 'https://localhost:7156/api/Note';
+  private url = '/api/Reminder';
+  private url1 = '/api/Note';
   public reminder: Reminder = new Reminder();
   public reminders: Reminder[] = [];
   public notes: Note[] = [];

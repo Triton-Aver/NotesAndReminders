@@ -38,7 +38,7 @@ describe('TageComponent', () => {
 
     component.ngOnInit();
 
-    const req = httpMock.expectOne('https://localhost:7156/api/Tage');
+    const req = httpMock.expectOne('/api/Tage');
     expect(req.request.method).toEqual('GET');
     req.flush(mockTags);
 
