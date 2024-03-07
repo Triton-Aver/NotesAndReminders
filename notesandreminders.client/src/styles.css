@@ -1,9 +1,4 @@
-body{
-    padding: 20px;    
-}
-.container {
-  padding: 10px;    
-}
-td, .col-button {
-  vertical-align: middle;
+body {
+  padding: 20px;
+  background-color: #e2ed9f;
 }
